@@ -24,7 +24,7 @@ use gtk::subclass::prelude::*;
 use gtk::{glib, pango};
 
 pub(crate) use cell_owners::CellOwners;
-pub(crate) use custom_icon::CUSTOM_ICON;
+pub(crate) use custom_icon::{custom_icon, CustomIcon, CUSTOM_ICON, CUSTOM_ICON_NAME};
 pub(crate) use expander::connect_expanders;
 pub(crate) use row_tooltip::{show_row_tooltip, CellTooltip, RowTooltip};
 
@@ -127,6 +127,10 @@ mod imp {
         /// The item's custom icon (PROP-016) or preview (VIEW-057), shown
         /// in place of the art.
         pub(super) custom_icon: gtk::Picture,
+        /// A named icon from the desktop theme, kept at the art's size.
+        pub(super) theme_icon: gtk::Image,
+        /// Bundled icon art at the same size as the default art.
+        pub(super) bundled_icon: ArtImage,
         /// The running lookup of the custom icon or preview.
         pub(super) picture_lookup: RefCell<Option<glib::JoinHandle<()>>>,
         /// Holds the icon, and on a tile spans it, with the check box in
@@ -159,6 +163,12 @@ mod imp {
             self.custom_icon.set_content_fit(gtk::ContentFit::Contain);
             self.custom_icon.set_visible(false);
             self.icon_frame.add_overlay(&self.custom_icon);
+            self.theme_icon.set_visible(false);
+            self.theme_icon.set_halign(gtk::Align::Center);
+            self.theme_icon.set_valign(gtk::Align::Center);
+            self.icon_frame.add_overlay(&self.theme_icon);
+            self.bundled_icon.set_visible(false);
+            self.icon_frame.add_overlay(&self.bundled_icon);
             cell.append(&self.icon_frame);
             cell.append(&self.label);
         }
@@ -184,6 +194,7 @@ impl FileCell {
         let imp = cell.imp();
         imp.icon_size.set(icon_size);
         imp.custom_icon.set_size_request(icon_size, icon_size);
+        imp.theme_icon.set_pixel_size(icon_size);
         // A folder until bound, so the cell has its full size from the start.
         imp.image.set_art(Art::Folder, icon_size);
         match layout {
@@ -201,6 +212,7 @@ impl FileCell {
         self.set_spacing(ROW_ICON_GAP);
         self.put_check_before_icon();
         self.imp().image.add_css_class("row-icon");
+        self.imp().bundled_icon.add_css_class("row-icon");
         let label = &self.imp().label;
         label.set_xalign(0.0);
         label.set_hexpand(true);

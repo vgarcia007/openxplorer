@@ -19,7 +19,7 @@ use ox_core::permissions::Account;
 const PROPERTY_ATTRIBUTES: &str = concat!(
     "time::created,time::access,access::can-read,access::can-write,",
     "access::can-execute,owner::user,owner::group,unix::mode,unix::uid,unix::gid,",
-    "standard::symlink-target,metadata::custom-icon,standard::allocated-size",
+    "standard::symlink-target,metadata::custom-icon,metadata::custom-icon-name,standard::allocated-size",
 );
 
 /// The permission bits Properties shows (`& 0o7777`).
@@ -178,7 +178,9 @@ fn read_properties_blocking(uri: &str) -> Result<ItemProperties, EntryError> {
         default_app,
         mount,
         dimensions,
-        has_custom_icon: optional_string(&info, "metadata::custom-icon").is_some_and(|icon| !icon.is_empty()),
+        has_custom_icon: ["metadata::custom-icon", "metadata::custom-icon-name"]
+            .iter()
+            .any(|key| optional_string(&info, key).is_some_and(|icon| !icon.is_empty())),
         size_on_disk: info
             .has_attribute("standard::allocated-size")
             .then(|| info.attribute_uint64("standard::allocated-size")),

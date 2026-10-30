@@ -464,6 +464,7 @@ impl BrowserWindow {
         for pane in self.folder_panes() {
             pane.owners().refresh_custom_icon(uri);
         }
+        self.render_places();
     }
 
     /// Lists again every tab and split pane showing `folder`, keeping their selection,

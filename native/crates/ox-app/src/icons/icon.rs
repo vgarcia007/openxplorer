@@ -240,12 +240,95 @@ pub(crate) enum Icon {
     WindowMultiple,
     /// `window_new_20_regular`: New window, in menus and in Settings.
     WindowNew,
+    /// archive for a custom folder or place.
+    Archive,
+    /// book for a custom folder or place.
+    Book,
+    /// briefcase for a custom folder or place.
+    Briefcase,
+    /// building for a custom folder or place.
+    Building,
+    /// calendar for a custom folder or place.
+    Calendar,
+    /// camera for a custom folder or place.
+    Camera,
+    /// cloud for a custom folder or place.
+    Cloud,
+    /// cloud sync for a custom folder or place.
+    CloudSync,
+    /// cloud arrow down for a custom folder or place.
+    CloudArrowDown,
+    /// database for a custom folder or place.
+    Database,
+    /// folder briefcase for a custom folder or place.
+    FolderBriefcase,
+    /// folder document for a custom folder or place.
+    FolderDocument,
+    /// folder globe for a custom folder or place.
+    FolderGlobe,
+    /// folder mail for a custom folder or place.
+    FolderMail,
+    /// folder people for a custom folder or place.
+    FolderPeople,
+    /// folder person for a custom folder or place.
+    FolderPerson,
+    /// folder multiple for a custom folder or place.
+    FolderMultiple,
+    /// folder sync for a custom folder or place.
+    FolderSync,
+    /// folder link for a custom folder or place.
+    FolderLink,
+    /// folder open for a custom folder or place.
+    FolderOpen,
+    /// folder search for a custom folder or place.
+    FolderSearch,
+    /// food for a custom folder or place.
+    Food,
+    /// games for a custom folder or place.
+    Games,
+    /// globe for a custom folder or place.
+    Globe,
+    /// heart for a custom folder or place.
+    Heart,
+    /// key for a custom folder or place.
+    Key,
+    /// mail for a custom folder or place.
+    Mail,
+    /// people for a custom folder or place.
+    People,
+    /// star for a custom folder or place.
+    Star,
+    /// tag for a custom folder or place.
+    Tag,
+    /// wallet for a custom folder or place.
+    Wallet,
+    /// Coloured book for a custom folder or place.
+    BookColor20,
+    /// Coloured briefcase for a custom folder or place.
+    BriefcaseColor20,
+    /// Coloured calendar for a custom folder or place.
+    CalendarColor20,
+    /// Coloured camera for a custom folder or place.
+    CameraColor20,
+    /// Coloured cloud for a custom folder or place.
+    CloudColor20,
+    /// Coloured database for a custom folder or place.
+    DatabaseColor20,
+    /// Coloured globe for a custom folder or place.
+    GlobeColor20,
+    /// Coloured heart for a custom folder or place.
+    HeartColor20,
+    /// Coloured mail for a custom folder or place.
+    MailColor20,
+    /// Coloured star for a custom folder or place.
+    StarColor20,
 }
 
 impl Icon {
     /// The icon's name in the app's icon theme: its file name under
     /// `resources/icons/hicolor/scalable/`, without `.svg`. An exhaustive
     /// table, hence its length.
+    #[allow(clippy::too_many_lines)]
     pub(crate) const fn name(self) -> &'static str {
         match self {
             Icon::Add => "ox-add-20-symbolic",
@@ -344,6 +427,47 @@ impl Icon {
             Icon::WindowConsole => "ox-window-console-20-symbolic",
             Icon::WindowMultiple => "ox-window-multiple-20-symbolic",
             Icon::WindowNew => "ox-window-new-20-symbolic",
+            Icon::Archive => "ox-archive-20-symbolic",
+            Icon::Book => "ox-book-20-symbolic",
+            Icon::Briefcase => "ox-briefcase-20-symbolic",
+            Icon::Building => "ox-building-20-symbolic",
+            Icon::Calendar => "ox-calendar-20-symbolic",
+            Icon::Camera => "ox-camera-20-symbolic",
+            Icon::Cloud => "ox-cloud-20-symbolic",
+            Icon::CloudSync => "ox-cloud-sync-20-symbolic",
+            Icon::CloudArrowDown => "ox-cloud-arrow-down-20-symbolic",
+            Icon::Database => "ox-database-20-symbolic",
+            Icon::FolderBriefcase => "ox-folder-briefcase-20-symbolic",
+            Icon::FolderDocument => "ox-folder-document-20-symbolic",
+            Icon::FolderGlobe => "ox-folder-globe-20-symbolic",
+            Icon::FolderMail => "ox-folder-mail-20-symbolic",
+            Icon::FolderPeople => "ox-folder-people-20-symbolic",
+            Icon::FolderPerson => "ox-folder-person-20-symbolic",
+            Icon::FolderMultiple => "ox-folder-multiple-20-symbolic",
+            Icon::FolderSync => "ox-folder-sync-20-symbolic",
+            Icon::FolderLink => "ox-folder-link-20-symbolic",
+            Icon::FolderOpen => "ox-folder-open-20-symbolic",
+            Icon::FolderSearch => "ox-folder-search-20-symbolic",
+            Icon::Food => "ox-food-20-symbolic",
+            Icon::Games => "ox-games-20-symbolic",
+            Icon::Globe => "ox-globe-20-symbolic",
+            Icon::Heart => "ox-heart-20-symbolic",
+            Icon::Key => "ox-key-20-symbolic",
+            Icon::Mail => "ox-mail-20-symbolic",
+            Icon::People => "ox-people-20-symbolic",
+            Icon::Star => "ox-star-20-symbolic",
+            Icon::Tag => "ox-tag-20-symbolic",
+            Icon::Wallet => "ox-wallet-20-symbolic",
+            Icon::BookColor20 => "ox-book-20-color",
+            Icon::BriefcaseColor20 => "ox-briefcase-20-color",
+            Icon::CalendarColor20 => "ox-calendar-20-color",
+            Icon::CameraColor20 => "ox-camera-20-color",
+            Icon::CloudColor20 => "ox-cloud-20-color",
+            Icon::DatabaseColor20 => "ox-database-20-color",
+            Icon::GlobeColor20 => "ox-globe-20-color",
+            Icon::HeartColor20 => "ox-heart-20-color",
+            Icon::MailColor20 => "ox-mail-20-color",
+            Icon::StarColor20 => "ox-star-20-color",
         }
     }
 
@@ -365,8 +489,7 @@ impl Icon {
 
 /// Every icon, in the order of [`Icon`], for the tests that check each one
 /// ships, is recorded and resolves.
-#[cfg(test)]
-pub(crate) const ALL_ICONS: [Icon; 96] = [
+pub(crate) const ALL_ICONS: [Icon; 137] = [
     Icon::Add,
     Icon::Apps,
     Icon::ArrowClockwise,
@@ -463,6 +586,47 @@ pub(crate) const ALL_ICONS: [Icon; 96] = [
     Icon::WindowConsole,
     Icon::WindowMultiple,
     Icon::WindowNew,
+    Icon::Archive,
+    Icon::Book,
+    Icon::Briefcase,
+    Icon::Building,
+    Icon::Calendar,
+    Icon::Camera,
+    Icon::Cloud,
+    Icon::CloudSync,
+    Icon::CloudArrowDown,
+    Icon::Database,
+    Icon::FolderBriefcase,
+    Icon::FolderDocument,
+    Icon::FolderGlobe,
+    Icon::FolderMail,
+    Icon::FolderPeople,
+    Icon::FolderPerson,
+    Icon::FolderMultiple,
+    Icon::FolderSync,
+    Icon::FolderLink,
+    Icon::FolderOpen,
+    Icon::FolderSearch,
+    Icon::Food,
+    Icon::Games,
+    Icon::Globe,
+    Icon::Heart,
+    Icon::Key,
+    Icon::Mail,
+    Icon::People,
+    Icon::Star,
+    Icon::Tag,
+    Icon::Wallet,
+    Icon::BookColor20,
+    Icon::BriefcaseColor20,
+    Icon::CalendarColor20,
+    Icon::CameraColor20,
+    Icon::CloudColor20,
+    Icon::DatabaseColor20,
+    Icon::GlobeColor20,
+    Icon::HeartColor20,
+    Icon::MailColor20,
+    Icon::StarColor20,
 ];
 
 #[cfg(test)]

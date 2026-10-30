@@ -34,4 +34,4 @@ pub(crate) mod sorting;
 pub(crate) mod tree;
 pub(crate) mod watch;
 
-pub(crate) use cells::CUSTOM_ICON;
+pub(crate) use cells::{custom_icon, CustomIcon, CUSTOM_ICON, CUSTOM_ICON_NAME};

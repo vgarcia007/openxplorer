@@ -1354,6 +1354,10 @@ msgid "Paste the checksum the file should have to check it."
 msgstr ""
 
 #: crates/ox-app/src/properties/custom_icon.rs
+msgid "All OpenXplorer icons"
+msgstr ""
+
+#: crates/ox-app/src/properties/custom_icon.rs
 msgid "Change icon…"
 msgstr ""
 
@@ -1362,7 +1366,23 @@ msgid "Choose an icon"
 msgstr ""
 
 #: crates/ox-app/src/properties/custom_icon.rs
+msgid "Choose from icons…"
+msgstr ""
+
+#: crates/ox-app/src/properties/custom_icon.rs
+msgid "Places and folders"
+msgstr ""
+
+#: crates/ox-app/src/properties/custom_icon.rs
 msgid "Restore default icon"
+msgstr ""
+
+#: crates/ox-app/src/properties/custom_icon.rs
+msgid "Search icons…"
+msgstr ""
+
+#: crates/ox-app/src/properties/custom_icon.rs
+msgid "System theme icons"
 msgstr ""
 
 #: crates/ox-app/src/properties/folder_sizes.rs

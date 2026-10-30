@@ -30,6 +30,7 @@ use std::sync::Once;
 
 use gtk::gdk;
 use gtk::prelude::*;
+use ox_core::places::KnownFolder;
 
 pub(crate) use art::{Art, Connection, Storage};
 pub(crate) use art_image::ArtImage;
@@ -38,6 +39,7 @@ pub(crate) use file_type::is_zip;
 #[cfg(test)]
 pub(crate) use file_type::FileType;
 pub(crate) use icon::Icon;
+pub(crate) use icon::ALL_ICONS;
 pub(crate) use tint::{stylesheet as tint_stylesheet, Tint};
 
 /// Where the bundled icons live in the application's resources: the
@@ -95,6 +97,28 @@ fn decorative_image() -> gtk::Image {
 pub(crate) fn set_icon(image: &gtk::Image, icon: Icon, size: i32) {
     image.set_icon_name(Some(icon.name()));
     image.set_pixel_size(size);
+}
+
+/// The art `OpenXplorer` uses for one of its bundled icon names.
+pub(crate) fn bundled_art(name: &str) -> Option<Art> {
+    let icon = ALL_ICONS.iter().copied().find(|icon| icon.name() == name)?;
+    let folder = match icon {
+        Icon::Desktop => Some(KnownFolder::Desktop),
+        Icon::ArrowDownload => Some(KnownFolder::Downloads),
+        Icon::Document => Some(KnownFolder::Documents),
+        Icon::Image => Some(KnownFolder::Pictures),
+        Icon::MusicNote => Some(KnownFolder::Music),
+        Icon::Video => Some(KnownFolder::Videos),
+        _ => None,
+    };
+    Some(match (icon, folder) {
+        (Icon::FileFolder, _) => Art::Folder,
+        (_, Some(folder)) => Art::for_known_folder(folder),
+        (Icon::Home, _) => Art::TintedGlyph(icon, Tint::Home),
+        (Icon::Laptop, _) => Art::TintedGlyph(icon, Tint::ThisPc),
+        (Icon::Organization, _) => Art::TintedGlyph(icon, Tint::Network),
+        _ => Art::Glyph(icon),
+    })
 }
 
 #[cfg(test)]
