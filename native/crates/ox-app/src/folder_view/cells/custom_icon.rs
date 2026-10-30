@@ -24,6 +24,14 @@ use crate::thumbnails::{self, PreviewPolicy, PreviewRequest};
 
 /// The metadata key Files stores a custom icon under.
 pub(crate) const CUSTOM_ICON: &str = "metadata::custom-icon";
+pub(crate) const CUSTOM_ICON_NAME: &str = "metadata::custom-icon-name";
+
+/// A picture supplied by the user, or an icon resolved from the current theme.
+pub(crate) enum CustomIcon {
+    Picture(gdk::Texture),
+    Theme(String),
+    Bundled(crate::icons::Art),
+}
 /// Pictures larger than this are not decoded for an icon.
 const MAX_ICON_BYTES: u64 = 16 * 1024 * 1024;
 /// The size a picture is decoded at: the largest icon the views draw.
@@ -69,6 +77,8 @@ impl FileCell {
         self.cancel_picture_lookup();
         let imp = self.imp();
         imp.custom_icon.set_visible(false);
+        imp.theme_icon.set_visible(false);
+        imp.bundled_icon.set_visible(false);
         imp.image.set_opacity(1.0);
         let entry = item.entry();
         let uri = entry.uri.clone();
@@ -82,16 +92,29 @@ impl FileCell {
         }
         let cell = self.downgrade();
         let lookup = glib::spawn_future_local(async move {
-            let mut texture = custom_icon(&uri).await;
-            if texture.is_none() {
-                if let Some(request) = preview {
-                    texture = thumbnails::preview(request).await;
-                }
-            }
-            if let (Some(cell), Some(texture)) = (cell.upgrade(), texture) {
+            let icon = if let Some(icon) = custom_icon(&uri).await {
+                Some(icon)
+            } else if let Some(request) = preview {
+                thumbnails::preview(request).await.map(CustomIcon::Picture)
+            } else {
+                None
+            };
+            if let (Some(cell), Some(icon)) = (cell.upgrade(), icon) {
                 let imp = cell.imp();
-                imp.custom_icon.set_paintable(Some(&texture));
-                imp.custom_icon.set_visible(true);
+                match icon {
+                    CustomIcon::Picture(texture) => {
+                        imp.custom_icon.set_paintable(Some(&texture));
+                        imp.custom_icon.set_visible(true);
+                    }
+                    CustomIcon::Theme(name) => {
+                        imp.theme_icon.set_icon_name(Some(&name));
+                        imp.theme_icon.set_visible(true);
+                    }
+                    CustomIcon::Bundled(art) => {
+                        imp.bundled_icon.set_art(art, imp.icon_size.get());
+                        imp.bundled_icon.set_visible(true);
+                    }
+                }
                 imp.image.set_opacity(0.0);
                 imp.picture_lookup.take();
             }
@@ -115,19 +138,32 @@ impl FileCell {
 }
 
 /// The custom icon of the local item at `uri`, if it has one.
-async fn custom_icon(uri: &str) -> Option<gdk::Texture> {
+pub(crate) async fn custom_icon(uri: &str) -> Option<CustomIcon> {
     if !uri.starts_with("file:") {
         return None;
     }
     let file = gio::File::for_uri(uri);
     let info = file
-        .query_info_future(CUSTOM_ICON, gio::FileQueryInfoFlags::NONE, glib::Priority::LOW)
+        .query_info_future(
+            &format!("{CUSTOM_ICON},{CUSTOM_ICON_NAME}"),
+            gio::FileQueryInfoFlags::NONE,
+            glib::Priority::LOW,
+        )
         .await
         .ok()?;
+    if let Some(name) = info
+        .attribute_string(CUSTOM_ICON_NAME)
+        .filter(|name| !name.is_empty())
+    {
+        if let Some(art) = crate::icons::bundled_art(&name) {
+            return Some(CustomIcon::Bundled(art));
+        }
+        return Some(CustomIcon::Theme(name.to_string()));
+    }
     let icon_uri = info
         .attribute_string(CUSTOM_ICON)
         .filter(|icon| !icon.is_empty())?;
-    icon_texture(icon_uri.to_string()).await
+    icon_texture(icon_uri.to_string()).await.map(CustomIcon::Picture)
 }
 
 /// The picture at `uri` at icon size, if it is a local image of a

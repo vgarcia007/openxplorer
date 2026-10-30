@@ -5,6 +5,9 @@ Every icon the native app shows is one of these files, copied byte for byte
 from its upstream set; none is drawn by the app or edited here. The product
 owner approved the set and its mapping on 2026-09-27.
 
+Additional icons for the custom-icon chooser were added from the same
+Fluent UI System Icons 1.1.343 package on 2026-10-27.
+
 The files use the `hicolor/scalable/<context>/` layout of a GTK icon theme and
 are compiled into the application as a GResource (`icons.gresource.xml`, built
 by `build.rs`). Every name starts with `ox-`, so no desktop icon theme can
@@ -113,16 +116,57 @@ it.
 | `mimetypes/ox-video-20-color.svg` | Fluent UI System Icons 1.1.343 | `icons/video_20_color.svg` | 35229cc6d92621f9d26137be6af04e88430ac1207f1f18ea6361f7374a8ab630 |
 | `mimetypes/ox-video-32-color.svg` | Fluent UI System Icons 1.1.343 | `icons/video_32_color.svg` | 912cc61ef867de0a02b09a1342e55249db7d29b3287af0700619b3917bcd9873 |
 | `mimetypes/ox-video-48-color.svg` | Fluent UI System Icons 1.1.343 | `icons/video_48_color.svg` | bb04990432790ab4281e5e423ddf2f69df3b7a752a50459fc1291e5664e81f90 |
+| `places/ox-archive-20-symbolic.svg` | Fluent UI System Icons 1.1.343 | `icons/archive_20_regular.svg` | 6a442fa7604b852835be9cdcea33e4ee70bde92ca672daa8a08da73880e03b10 |
 | `places/ox-arrow-download-20-symbolic.svg` | Fluent UI System Icons 1.1.343 | `icons/arrow_download_20_regular.svg` | cc965b2de3fca74d76e48d93fb2a2c68756e1fab748bb06de904a8e17ca4e5c2 |
+| `places/ox-book-20-color.svg` | Fluent UI System Icons 1.1.343 | `icons/book_20_color.svg` | 00659d0b04fa5b8588eb5accce405e1d46ef8bd3c181410db798c8b722da56a5 |
+| `places/ox-book-20-symbolic.svg` | Fluent UI System Icons 1.1.343 | `icons/book_20_regular.svg` | 1706f4a9d28bc96f8a5ae275035097dbf8bc71a5a146346178259e379675f48e |
+| `places/ox-briefcase-20-color.svg` | Fluent UI System Icons 1.1.343 | `icons/briefcase_20_color.svg` | 19fff5b9dd9e025ddb93a22012510d0c5dfd7d155fa4059ea859d995fed88209 |
+| `places/ox-briefcase-20-symbolic.svg` | Fluent UI System Icons 1.1.343 | `icons/briefcase_20_regular.svg` | d11789409c2f553610b6b23073838c657e80fc79aa05091cea910d70fa9f8cab |
+| `places/ox-building-20-symbolic.svg` | Fluent UI System Icons 1.1.343 | `icons/building_20_regular.svg` | 6de1e192f8d06960433a86ef15fb417c4f280c38079e373d5722a6741ebfbbe3 |
+| `places/ox-calendar-20-color.svg` | Fluent UI System Icons 1.1.343 | `icons/calendar_20_color.svg` | eeabfa535bae6658e0587809ceae46c4c1f4c6d7b8ac0159e38bf17024573a23 |
+| `places/ox-calendar-20-symbolic.svg` | Fluent UI System Icons 1.1.343 | `icons/calendar_20_regular.svg` | df0db6c0f1a27b2a33e3f07b27a09f23a1f1ba8de340ff2e76311eab7e2993af |
+| `places/ox-camera-20-color.svg` | Fluent UI System Icons 1.1.343 | `icons/camera_20_color.svg` | d634081db8d25759765af0f6068b0369ca7c0692454cb7f654f2cdbf41f35865 |
+| `places/ox-camera-20-symbolic.svg` | Fluent UI System Icons 1.1.343 | `icons/camera_20_regular.svg` | 84cad97118cea3155040ca0f3d55e005ab424943a3a55cac139401f53a68b5c5 |
+| `places/ox-cloud-20-color.svg` | Fluent UI System Icons 1.1.343 | `icons/cloud_20_color.svg` | febfea760afe7624f0cd301def0b6d79e71bb2652f2a053c0fea3369a00f3918 |
+| `places/ox-cloud-20-symbolic.svg` | Fluent UI System Icons 1.1.343 | `icons/cloud_20_regular.svg` | 0ae91870f8a328febd6a9ece3d87663b7fd3e9db39b652d9191e62e7a93e6812 |
+| `places/ox-cloud-arrow-down-20-symbolic.svg` | Fluent UI System Icons 1.1.343 | `icons/cloud_arrow_down_20_regular.svg` | 3a170020ef4820821a617a2fda3c0526eebe8c2ddc726ec7c9632fa5a7644ce8 |
+| `places/ox-cloud-sync-20-symbolic.svg` | Fluent UI System Icons 1.1.343 | `icons/cloud_sync_20_regular.svg` | 32496b8fbdab8e6e14fbe9c00956eca4aaea0058920f71b5442fbbb31bf85226 |
+| `places/ox-database-20-color.svg` | Fluent UI System Icons 1.1.343 | `icons/database_20_color.svg` | 99281abeec8b6b1fb5232288198e6090e61674d0085e6b86c0034fc527e6d659 |
+| `places/ox-database-20-symbolic.svg` | Fluent UI System Icons 1.1.343 | `icons/database_20_regular.svg` | cf5847e5ecd72282d815762fb539e2b76af278472b5d4f633d5c480e3255f299 |
 | `places/ox-desktop-20-symbolic.svg` | Fluent UI System Icons 1.1.343 | `icons/desktop_20_regular.svg` | 941d16c07f8f5468d0e2461710b7806affd20e6604f9be15374548370bcdd9e1 |
 | `places/ox-document-20-symbolic.svg` | Fluent UI System Icons 1.1.343 | `icons/document_20_regular.svg` | 5f5416510d8a774d427a05e8102dd878aa7317478644480a57a9ab50a1104650 |
 | `places/ox-file-folder-flat.svg` | Fluent Emoji 1ffb34c | `assets/File folder/Flat/file_folder_flat.svg` | 870727aa9758f76359181c035456aba47e87d622a619a0ee80fb60b40070fbd1 |
 | `places/ox-folder-20-symbolic.svg` | Fluent UI System Icons 1.1.343 | `icons/folder_20_regular.svg` | d144cc84fe8997e44aede97843ba009454b5302e9d9827e01c6540e8eef4aaa8 |
+| `places/ox-folder-briefcase-20-symbolic.svg` | Fluent UI System Icons 1.1.343 | `icons/folder_briefcase_20_regular.svg` | d61bc7428b2f0015896890f7bfb851c922cd0c9fc1fa55e7d3071233d10dc0f1 |
+| `places/ox-folder-document-20-symbolic.svg` | Fluent UI System Icons 1.1.343 | `icons/folder_document_20_regular.svg` | 59c87d8d1ea09283f9394053e7704d9778f23ba01fd7c762bab8f10fb945db0a |
+| `places/ox-folder-globe-20-symbolic.svg` | Fluent UI System Icons 1.1.343 | `icons/folder_globe_20_regular.svg` | 83b4a32d894015ccb26828d6910353e1d7ead2a7e6f66c5fd20e32d5e96a4569 |
+| `places/ox-folder-link-20-symbolic.svg` | Fluent UI System Icons 1.1.343 | `icons/folder_link_20_regular.svg` | b373799f68b43bc75bb0a24b1b9a8bbe3dad474beb20971a9fa241211bdbe687 |
+| `places/ox-folder-mail-20-symbolic.svg` | Fluent UI System Icons 1.1.343 | `icons/folder_mail_20_regular.svg` | 217f90071aa2091bbd72d5ed2802220511606cc2cffb346e91a8d8daa5398991 |
+| `places/ox-folder-multiple-20-symbolic.svg` | Fluent UI System Icons 1.1.343 | `icons/folder_multiple_20_regular.svg` | 3edc0bb411f26449e1ff7ed3f8bb3ceb912e3531ef4ddd0f84aa4d9bcb23b491 |
+| `places/ox-folder-open-20-symbolic.svg` | Fluent UI System Icons 1.1.343 | `icons/folder_open_20_regular.svg` | ed56c692301eba6af0415171afdd55ff11577206e739b2887f60047935ff5a6a |
+| `places/ox-folder-people-20-symbolic.svg` | Fluent UI System Icons 1.1.343 | `icons/folder_people_20_regular.svg` | 2e4853b968728edb3ef5044adc92f893731050642131233376f7790c7bf785ed |
+| `places/ox-folder-person-20-symbolic.svg` | Fluent UI System Icons 1.1.343 | `icons/folder_person_20_regular.svg` | 65981a0232601310aef7a02b70807c64a7a4ccf8c90f2bba6132a852396da219 |
+| `places/ox-folder-search-20-symbolic.svg` | Fluent UI System Icons 1.1.343 | `icons/folder_search_20_regular.svg` | c388cb5b011e5028274f6325181ac395e85fd90db5761436e7b4879bd890675f |
+| `places/ox-folder-sync-20-symbolic.svg` | Fluent UI System Icons 1.1.343 | `icons/folder_sync_20_regular.svg` | bcb37c03a3b16cab7cfd7c44bd23f011c8c2ca24d2bb0fa7c9f6d97c94008bdf |
+| `places/ox-food-20-symbolic.svg` | Fluent UI System Icons 1.1.343 | `icons/food_20_regular.svg` | b9b83dc6d59949740f6432c9df0a3d052ae3b7fe3499ca8d670f35e22f87a422 |
+| `places/ox-games-20-symbolic.svg` | Fluent UI System Icons 1.1.343 | `icons/games_20_regular.svg` | d8195c7c0ad54ac34fe5420d14ace2e190ebfa8b833de62ac906b0622087f368 |
+| `places/ox-globe-20-color.svg` | Fluent UI System Icons 1.1.343 | `icons/globe_20_color.svg` | 7beeabd54ddc0d954bb27fb3f2f6e3a714c4a205f1c0813d3c3ca070ca5dd7bc |
+| `places/ox-globe-20-symbolic.svg` | Fluent UI System Icons 1.1.343 | `icons/globe_20_regular.svg` | acf22c2117985e09961afd4fea939d0c1d577c517a18f9dfba87d7cf72c75ba3 |
+| `places/ox-heart-20-color.svg` | Fluent UI System Icons 1.1.343 | `icons/heart_20_color.svg` | 4ec8d5dcedc312e9f888a141f86ed514392f59eaf4de893e2d10b7fe8bf049e8 |
+| `places/ox-heart-20-symbolic.svg` | Fluent UI System Icons 1.1.343 | `icons/heart_20_regular.svg` | 403e0ae538fa58c83e96b495b2c0965788198833fbc63b00ac8044d92ac1dde1 |
 | `places/ox-home-20-symbolic.svg` | Fluent UI System Icons 1.1.343 | `icons/home_20_regular.svg` | dac78c102bf3fbd572d213673fc45c4cee38208fd80d42a12fc34ae94016b069 |
 | `places/ox-image-20-symbolic.svg` | Fluent UI System Icons 1.1.343 | `icons/image_20_regular.svg` | 0e57f2cad97fe254f56e0997f877e1bb902efc9e2fc9b14f2091d1ce7301226c |
+| `places/ox-key-20-symbolic.svg` | Fluent UI System Icons 1.1.343 | `icons/key_20_regular.svg` | ed69e801015c3c2a327c7f9f9cb03032a4ba66213ffeaf1effa24a3735282b8f |
+| `places/ox-mail-20-color.svg` | Fluent UI System Icons 1.1.343 | `icons/mail_20_color.svg` | 7a75cf8f2aa390adeeb5836ee8a95eb1ab9d1a5084d6c5eab51b408cc9afda12 |
+| `places/ox-mail-20-symbolic.svg` | Fluent UI System Icons 1.1.343 | `icons/mail_20_regular.svg` | 8aa051904377b23103019322703930ef1919d6e12f0ef59d1c0a8123b1a0bc0f |
 | `places/ox-music-note-2-20-symbolic.svg` | Fluent UI System Icons 1.1.343 | `icons/music_note_2_20_regular.svg` | e23841dcf78e78a5b5f624ab8cd702836e485a21216ba8e5058265f1f3522c69 |
 | `places/ox-organization-20-symbolic.svg` | Fluent UI System Icons 1.1.343 | `icons/organization_20_regular.svg` | b996c1ee7354c2b5bbed026cf8cb6e51298876381954cfb2d63372f1719937bd |
+| `places/ox-people-20-symbolic.svg` | Fluent UI System Icons 1.1.343 | `icons/people_20_regular.svg` | fb659ce0cda3bda27845f281e69a56fddb1b9bfdd9cbde47fcf3de62887b4a68 |
+| `places/ox-star-20-color.svg` | Fluent UI System Icons 1.1.343 | `icons/star_20_color.svg` | b147fe4f819e1637949885052a6f441a1e25d5fa353eedc5d6cef67f0b468593 |
+| `places/ox-star-20-symbolic.svg` | Fluent UI System Icons 1.1.343 | `icons/star_20_regular.svg` | ed9f5a8c58c4a2b0f240467fe5f63d5849425004971214bee6ba8afbced27e7d |
+| `places/ox-tag-20-symbolic.svg` | Fluent UI System Icons 1.1.343 | `icons/tag_20_regular.svg` | e89c24a59eac7dde64f14e2533c2e95e829cf73c1e6ea7e83b06ea653a58e37a |
 | `places/ox-video-20-symbolic.svg` | Fluent UI System Icons 1.1.343 | `icons/video_20_regular.svg` | 0d08b2e62ce110c379e9f726a954a81f8ee8eeb279d60e2eae4ebcea8a025365 |
+| `places/ox-wallet-20-symbolic.svg` | Fluent UI System Icons 1.1.343 | `icons/wallet_20_regular.svg` | e3e4717ae07107f7b482073f53d461886ca3be13b44aaa0c5702646b4cbb1ec8 |
 | `status/ox-clock-20-symbolic.svg` | Fluent UI System Icons 1.1.343 | `icons/clock_20_regular.svg` | fd5202fb96544171c260e8541138dfb49c29a7db3c1801cdc5a15333f673e067 |
 | `status/ox-info-20-symbolic.svg` | Fluent UI System Icons 1.1.343 | `icons/info_20_regular.svg` | b2171313057fcd3cffca9c20cf905a05977e63eebe5275bab4371b1f0d4a1ff8 |
 | `status/ox-shield-lock-20-symbolic.svg` | Fluent UI System Icons 1.1.343 | `icons/shield_lock_20_regular.svg` | 1ee2491675efa4f0882313130035a5ae4bcf7b3a0634fe33f60ddf30390dbc2b |

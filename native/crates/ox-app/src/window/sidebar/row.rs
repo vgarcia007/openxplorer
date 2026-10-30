@@ -10,6 +10,7 @@
 
 use gtk::prelude::*;
 
+use crate::folder_view::{custom_icon, CustomIcon};
 use crate::icons::{self, Art, ArtImage, Icon};
 use crate::window::landing;
 use crate::window::place_menus::{removal_action, PlaceMenu};
@@ -99,7 +100,74 @@ fn row_content(entry: &SidebarEntry, icon_size: u32, collapsed: bool) -> gtk::Bo
         // The network pipe says what it means (`.side-icon.shared`).
         icon.set_tooltip_text(Some(&ox_core::i18n::gettext("Network share")));
     }
-    content.append(&icon);
+    if entry.pinned {
+        if let RowTarget::Location(uri) = &entry.target {
+            let picture_size = i32::try_from(icon_size)
+                .ok()
+                .filter(|size| *size > 0)
+                .unwrap_or(ART_SIZE);
+            let picture = gtk::Picture::builder()
+                .accessible_role(gtk::AccessibleRole::Presentation)
+                .build();
+            picture.set_content_fit(gtk::ContentFit::Contain);
+            picture.set_size_request(picture_size, picture_size);
+            picture.set_halign(gtk::Align::Center);
+            picture.set_valign(gtk::Align::Center);
+            picture.set_can_target(false);
+            picture.set_visible(false);
+            let theme_icon = gtk::Image::new();
+            theme_icon.set_pixel_size(picture_size);
+            theme_icon.set_halign(gtk::Align::Center);
+            theme_icon.set_valign(gtk::Align::Center);
+            theme_icon.set_can_target(false);
+            theme_icon.set_visible(false);
+            // The normal row's margin belongs outside the icon. Keeping it on
+            // the child would centre overlays in the icon plus its right gap.
+            let margin_class = match entry.icon {
+                Art::Glyph(_) | Art::TintedGlyph(..) => "side-glyph",
+                _ => "side-art",
+            };
+            icon.remove_css_class(margin_class);
+            let overlay = gtk::Overlay::builder()
+                .child(&icon)
+                .css_classes([margin_class])
+                .build();
+            overlay.add_overlay(&picture);
+            overlay.add_overlay(&theme_icon);
+            let uri = uri.clone();
+            let picture_weak = picture.downgrade();
+            let theme_weak = theme_icon.downgrade();
+            let icon_weak = icon.downgrade();
+            gtk::glib::spawn_future_local(async move {
+                if let Some(custom) = custom_icon(&uri).await {
+                    if let (Some(picture), Some(theme_icon), Some(icon)) =
+                        (picture_weak.upgrade(), theme_weak.upgrade(), icon_weak.upgrade())
+                    {
+                        match custom {
+                            CustomIcon::Picture(texture) => {
+                                picture.set_paintable(Some(&texture));
+                                picture.set_visible(true);
+                                icon.set_opacity(0.0);
+                            }
+                            CustomIcon::Theme(name) => {
+                                theme_icon.set_icon_name(Some(&name));
+                                theme_icon.set_visible(true);
+                                icon.set_opacity(0.0);
+                            }
+                            CustomIcon::Bundled(art) => {
+                                icon.set_art(art, picture_size);
+                            }
+                        }
+                    }
+                }
+            });
+            content.append(&overlay);
+        } else {
+            content.append(&icon);
+        }
+    } else {
+        content.append(&icon);
+    }
     content.append(&name_and_capacity(entry));
     if entry.pinned {
         let pin = icons::image(Icon::Pin, PIN_SIZE);
